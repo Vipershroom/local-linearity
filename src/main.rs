@@ -7,14 +7,20 @@ struct Args {
     num: Option<f32>,
 }
 
-fn local_linearity() {
-    
+fn local_linearity(x: f32) -> f32 {
+    let a = x.floor();
+    let f_of_a = f32::sqrt(a);
+    let f_prime_of_a = 1.0 / (2.0 * f_of_a);
+    let x_a = x - a;
+    let product = f_of_a + (f_prime_of_a * x_a);
+    product
 }
 
 
 fn main() {
     let args = Args::parse();
-    println!("{:?}", args.num.unwrap())
+    let product = local_linearity(args.num.unwrap());
+    println!("{:.2}", product)
 }
 
 
